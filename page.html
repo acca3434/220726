@@ -5,8 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+        <!-- 2교시때 추가한 문구 -->
+    <!-- 얘는 실제하는 js주소값이 아니에요 -->
+    <script src="/socket.io/socket.io.js"></script>
+<!-- socket.io 모듈은 내부적으로 루트/socket.io가 경로에
+     socket.io.js 파일을 자동으로 등록해준다
+     결과적으로는 위에 불러온 스크립트는
+     http://localhost:3000/socket.io/socket.io.js
+     에 접근해서 js 스크립트를 불러오게 된다.
+    -->
 </head>
 <body>
     <div>첫 페이지</div>
+    <input type="text" id="text">
+    <input type="text" id="user">
+    <!-- 3교시 추가 문구 -->
+    <button id="button">통신</button>
+    <script>
+        //2교시때 추가한 문구 
+        //window.onload html이 로드가 된 후
+        window.onload = () =>{
+            // 소켓 객체를 뽑아서 클라이언트에 연결
+            const socket = io.connect();
+            socket.on("hi",(data)=>{
+                alert(data);
+            });
+            // <!-- 3교시 추가 문구 -->
+            button.onclick = () =>{
+                const msg = text.value;
+                const id = user.value;
+                socket.emit("hi",{msg,id});
+                
+            };
+        };
+    </script>
 </body>
 </html>
